@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path'); // Ajout nécessaire pour le déploiement
 
-
-//importing the profile route
-const profileRoutes=require('./routes/profile');
+// Importing the profile route
+const profileRoutes = require('./routes/profile');
 
 app.use(cors());
 app.use(express.json());
@@ -13,8 +13,8 @@ app.use(express.json());
 require('dotenv').config({ path: "./config.env" });
 const PORT = process.env.PORT || 5001;
 
-//using the route
-app.use('/',profileRoutes)
+// Using the route
+app.use('/', profileRoutes);
 
 // Configuration pour la production - doit être placé APRÈS vos autres routes
 if (process.env.NODE_ENV === "production") {
@@ -30,14 +30,12 @@ if (process.env.NODE_ENV === "production") {
 mongoose.connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-
-}) .then(() => {
+}).then(() => {
     console.log("MongoDB connected successfully");
-}) .catch((err) => {
+}).catch((err) => {
     console.error("MongoDB connection error:", err);
 });
 
-app.listen(PORT, ()=>{
-    console.log(`Server is rinning on http://localhost:${PORT}`);
-})
-
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
