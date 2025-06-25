@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 
   // Gère les requêtes GET qui ne correspondent à aucune route API
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    res.sendFile(path.join(__dirname, "client","build", "index.html"));
   });
 }
 
